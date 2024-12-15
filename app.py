@@ -42,6 +42,7 @@ with open('openaiapikey.txt', 'r') as f:
 
 from openai import OpenAI
 client = OpenAI(api_key=OPENAI_API_KEY)
+print(OPENAI_API_KEY[:10])
 
 # middleware to log all requests
 @app.middleware("http")
