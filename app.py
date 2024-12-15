@@ -38,7 +38,7 @@ class LLMResponse(BaseModel):
     content: str
 
 with open('openaiapikey.txt', 'r') as f:
-    OPENAI_API_KEY = f.read()
+    OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY', f.read())
 
 from openai import OpenAI
 client = OpenAI(api_key=OPENAI_API_KEY)
