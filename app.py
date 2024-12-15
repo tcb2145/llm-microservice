@@ -50,8 +50,12 @@ async def sql_logging(request: Request, call_next):
     start_time = time.perf_counter()
 
     headers = dict(request.scope['headers'])
-    correlation_id = str(uuid.uuid4()) if 'x-correlation-id' not in headers else headers['x-correlation-id']
-    headers['x-correlation-id'] = correlation_id
+
+    print(request.headers)
+    print(headers)
+    
+    correlation_id = str(uuid.uuid4()) if b'x-correlation-id' not in headers else str(headers[b'x-correlation-id'])
+    headers[b'x-correlation-id'] = correlation_id.encode('latin-1')
     request.scope['headers'] = [(k, v) for k, v in headers.items()]
 
     response = await call_next(request)
