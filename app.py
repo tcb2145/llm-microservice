@@ -51,9 +51,6 @@ async def sql_logging(request: Request, call_next):
 
     headers = dict(request.scope['headers'])
 
-    print(request.headers)
-    print(headers)
-    
     if b'x-correlation-id' not in headers:
         correlation_id = str(uuid.uuid4())
         headers[b'x-correlation-id'] = correlation_id.encode('latin-1')
